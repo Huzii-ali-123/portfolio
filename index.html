@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Huzaifa Ali | Full Stack Dev</title>
+    <meta name="description" content="Portfolio of Huzaifa Ali, a Full Stack Developer specializing in PHP, Laravel, React, and Modern Web Technologies.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <!-- GSAP & Lenis for Butter Smooth Scrolling -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'acid-green': '#ccff00',
+                        'neon-purple': '#b026ff',
+                        'dark-bg': '#0a0a0a',
+                        'card-bg': '#121212',
+                    },
+                    fontFamily: {
+                        'display': ['Syne', 'sans-serif'],
+                        'body': ['Space Grotesk', 'sans-serif'],
+                    },
+                    backgroundImage: {
+                        'grid-pattern': "linear-gradient(to right, #1f1f1f 1px, transparent 1px), linear-gradient(to bottom, #1f1f1f 1px, transparent 1px)",
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #050505;
+            color: #e0e0e0;
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        /* Lenis Smooth Scroll Core */
+        html.lenis {
+            height: auto;
+        }
+        .lenis.lenis-smooth {
+            scroll-behavior: auto;
+        }
+        .lenis.lenis-smooth [data-lenis-prevent] {
+            overscroll-behavior: contain;
+        }
+        .lenis.lenis-stopped {
+            overflow: hidden;
+        }
+        
+        /* Custom Cursor */
+        .cursor-dot,
+        .cursor-outline {
+            position: fixed;
+            top: 0;
+            left: 0;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            z-index: 9999;
+            pointer-events: none;
+        }
+        
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #ccff00;
+        }
+        
+        .cursor-outline {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(204, 255, 0, 0.5);
+            transition: width 0.2s, height 0.2s, background-color 0.2s;
+        }
+
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: -1;
+            opacity: 0.6;
+        }
+
+        .glass-panel {
+            background: rgba(18, 18, 18, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .text-stroke {
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.2);
+            color: transparent;
+        }
+
+        .hover-reveal:hover .text-stroke {
+            color: #ccff00;
+            -webkit-text-stroke: 0px;
+        }
+
+        .marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .marquee-content {
+            display: inline-block;
+            animation: scroll 20s linear infinite;
+        }
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .infinite-scroll-wrapper {
+            display: flex;
+            width: 100%;
+            overflow: hidden;
+        }
+        .infinite-scroll-content {
+            display: flex;
+            white-space: nowrap;
+            animation: infinite-scroll-loop 20s linear infinite;
+        }
+        @keyframes infinite-scroll-loop {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ccff00;
+        }
+
+        .progress-wrap {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            height: 50px;
+            width: 50px;
+            cursor: pointer;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            z-index: 100;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            background: rgba(0,0,0,0.2);
+            box-shadow: inset 0 0 0 2px rgba(255,255,255,0.1);
+        }
+        .progress-wrap.active-progress {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .progress-wrap svg path { 
+            fill: none; 
+        }
+        .progress-wrap svg.progress-circle path {
+            stroke: #ccff00;
+            stroke-width: 4;
+            transition: stroke-dashoffset 10ms linear;
+        }
+        .progress-wrap:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(204, 255, 0, 0.3);
+            border-color: #ccff00;
+        }
+        .arrow-icon {
+            transition: transform 0.3s ease;
+        }
+        .progress-wrap:hover .arrow-icon {
+            transform: translateY(-3px);
+        }
+        
+        .workflow-step::after {
+            content: '';
+            position: absolute;
+            top: 2rem;
+            left: 50%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #ccff00 50%, transparent 50%);
+            background-size: 20px 100%;
+            z-index: -1;
+            display: none;
+        }
+        @media (min-width: 768px) {
+            .workflow-step:not(:last-child)::after {
+                display: block;
+            }
+        }
+
+        .timeline-dot::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            background: rgba(204, 255, 0, 0.4);
+            border-radius: 50%;
+            z-index: -1;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+            100% { transform: translate(-50%, -50%) scale(2); opacity: 0; }
+        }
+
+        .filter-btn.active {
+            background-color: #ccff00;
+            color: black;
+            border-color: #ccff00;
+        }
+
+    </style>
+</head>
+<body class="font-body selection:bg-acid-green selection:text-black">
+
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <div id="canvas-container"></div>
+
+    <nav class="fixed top-0 w-full z-50 px-6 py-4 glass-panel">
+        <div class="max-w-7xl mx-auto flex justify-between items-center relative z-50">
+            <a href="#" class="text-2xl font-display font-bold tracking-tighter hover:text-acid-green transition-colors">
+                HUZZZ<span class="text-acid-green">.TECH</span>
+            </a>
+            
+            <div class="hidden md:flex gap-8 text-sm uppercase tracking-widest font-bold">
+                <a href="#about" class="hover:text-acid-green transition-colors relative group">About
+                    <span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-acid-green transition-all group-hover:w-full"></span>
+                </a>
+                <a href="#services" class="hover:text-acid-green transition-colors relative group">Services
+                    <span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-acid-green transition-all group-hover:w-full"></span>
+                </a>
+                <a href="#experience" class="hover:text-acid-green transition-colors relative group">Exp.
+                    <span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-acid-green transition-all group-hover:w-full"></span>
+                </a>
+                <a href="#projects" class="hover:text-acid-green transition-colors relative group">Works
+                    <span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-acid-green transition-all group-hover:w-full"></span>
+                </a>
+                <a href="#contact" class="hover:text-acid-green transition-colors relative group">Contact
+                    <span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-acid-green transition-all group-hover:w-full"></span>
+                </a>
+            </div>
+
+            <button onclick="document.getElementById('contact').scrollIntoView()" class="hidden md:block px-6 py-2 border border-acid-green text-acid-green font-bold text-sm uppercase hover:bg-acid-green hover:text-black transition-all duration-300">
+                Let's Talk
+            </button>
+            
+            <button class="md:hidden text-white relative z-50 focus:outline-none" id="mobile-menu-btn">
+                <i data-lucide="menu" id="menu-icon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <div id="mobile-menu" class="fixed inset-0 bg-black/95 backdrop-blur-xl z-40 transform translate-x-full transition-transform duration-300 flex flex-col justify-center items-center gap-8 text-4xl font-display font-bold">
+        <a href="#about" class="hover:text-acid-green hover:italic transition-all">ABOUT</a>
+        <a href="#services" class="hover:text-acid-green hover:italic transition-all">SERVICES</a>
+        <a href="#experience" class="hover:text-acid-green hover:italic transition-all">EXPERIENCE</a>
+        <a href="#projects" class="hover:text-acid-green hover:italic transition-all">WORKS</a>
+        <a href="#contact" class="hover:text-acid-green hover:italic transition-all">CONTACT</a>
+    </div>
+
+    <header class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="max-w-4xl">
+                <p class="text-acid-green font-mono mb-4">>> Hello_World</p>
+                <h1 class="text-6xl md:text-8xl lg:text-9xl font-display font-bold leading-[0.9] tracking-tighter mb-8 mix-blend-difference">
+                    FULL STACK<br>
+                    <span class="text-stroke hover-reveal transition-all duration-500 cursor-none">DEVELOPER</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-400 max-w-2xl font-light mb-12 border-l-2 border-acid-green pl-6">
+                    I'm <span class="text-white font-bold">Shaikh M. Huzaifa Ali</span>. I build scalable applications, craft digital experiences, and turn caffeine into clean code using Laravel, React & PHP.
+                </p>
+                
+                <div class="flex flex-wrap gap-4">
+                    <a href="#projects" class="group relative px-8 py-4 bg-acid-green text-black font-bold uppercase tracking-wider overflow-hidden">
+                        <span class="relative z-10 group-hover:text-white transition-colors">View Projects</span>
+                        <div class="absolute inset-0 bg-black transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-10 left-0 w-full opacity-20 pointer-events-none rotate-[-2deg]">
+            <div class="marquee-container">
+                <div class="marquee-content text-8xl font-display font-bold text-transparent" style="-webkit-text-stroke: 1px white;">
+                    PHP LARAVEL REACT MONGODB MYSQL PHP LARAVEL REACT MONGODB MYSQL PHP LARAVEL REACT MONGODB MYSQL
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="w-full bg-acid-green text-black py-3 border-y border-black infinite-scroll-wrapper">
+        <div class="infinite-scroll-content">
+            <span class="mx-8 font-bold font-mono text-lg">OPEN TO WORK</span> ✦ 
+            <span class="mx-8 font-bold font-mono text-lg">FULL STACK WIZARDRY</span> ✦ 
+            <span class="mx-8 font-bold font-mono text-lg">BASED IN PAKISTAN</span> ✦ 
+            <span class="mx-8 font-bold font-mono text-lg">CLEAN CODE</span> ✦
+        </div>
+        <div class="infinite-scroll-content">
+            <span class="mx-8 font-bold font-mono text-lg">OPEN TO WORK</span> ✦ 
+            <span class="mx-8 font-bold font-mono text-lg">FULL STACK WIZARDRY</span> ✦ 
+            <span class="mx-8 font-bold font-mono text-lg">BASED IN PAKISTAN</span> ✦ 
+            <span class="mx-8 font-bold font-mono text-lg">CLEAN CODE</span> ✦
+        </div>
+    </div>
+
+    <section class="py-12 border-b border-white/5 bg-white/[0.02] backdrop-blur-sm">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-white/10">
+                <div class="stat-item">
+                    <span class="text-4xl md:text-5xl font-bold text-white counter" data-target="15">0</span><span class="text-acid-green text-4xl font-bold">+</span>
+                    <p class="text-xs font-mono text-gray-400 mt-2 uppercase tracking-wider">Projects Completed</p>
+                </div>
+                <div class="stat-item">
+                    <span class="text-4xl md:text-5xl font-bold text-white counter" data-target="1200">0</span><span class="text-acid-green text-4xl font-bold">+</span>
+                    <p class="text-xs font-mono text-gray-400 mt-2 uppercase tracking-wider">Cups of Coffee</p>
+                </div>
+                 <div class="stat-item">
+                    <span class="text-4xl md:text-5xl font-bold text-white counter" data-target="3">0</span><span class="text-acid-green text-4xl font-bold"></span>
+                    <p class="text-xs font-mono text-gray-400 mt-2 uppercase tracking-wider">Years Experience</p>
+                </div>
+                 <div class="stat-item">
+                    <span class="text-4xl md:text-5xl font-bold text-white counter" data-target="99">0</span><span class="text-acid-green text-4xl font-bold">%</span>
+                    <p class="text-xs font-mono text-gray-400 mt-2 uppercase tracking-wider">Client Satisfaction</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-32 relative">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div class="order-2 md:order-1 relative">
+                    <div class="aspect-square w-full max-w-md mx-auto border border-white/10 relative p-8 group">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-acid-green/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <div class="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-acid-green"></div>
+                        <div class="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-acid-green"></div>
+                        
+                        <div class="h-full w-full flex flex-col justify-between">
+                            <i data-lucide="terminal" class="w-12 h-12 text-acid-green"></i>
+                            <h3 class="text-4xl font-display font-bold">
+                                PROBLEM<br>SOLVER
+                            </h3>
+                            <div class="font-mono text-sm text-gray-400">
+                                class Developer {<br>
+                                &nbsp;&nbsp;constructor() {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;this.passion = "Building Dreams";<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;this.coffee = true;<br>
+                                &nbsp;&nbsp;}<br>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="order-1 md:order-2">
+                    <h2 class="text-acid-green font-mono mb-2">01. / ABOUT ME</h2>
+                    <h3 class="text-4xl md:text-5xl font-display font-bold mb-6">Building Digital <br>Architecture.</h3>
+                    <p class="text-gray-400 text-lg leading-relaxed mb-6">
+                        I am an enthusiastic Full Stack Web Developer based in Pakistan with a passion for transforming complex problems into elegant, scalable solutions. My journey began with a curiosity for how things work on the web, which quickly evolved into a career building robust applications.
+                    </p>
+                    <p class="text-gray-400 text-lg leading-relaxed mb-8">
+                        Whether I'm architecting a database schema for a streaming platform or fine-tuning the animations on a landing page, I focus on performance, user experience, and clean, maintainable code. I don't just write code; I build digital assets that drive results.
+                    </p>
+                    
+                    <a href="https://drive.google.com/uc?export=download&id=1Xr2OBnLzhDsC87y7nkarOGoL0HVSAfH7" target="_blank" class="inline-flex items-center gap-2 text-acid-green border-b border-acid-green pb-1 font-bold hover:text-white hover:border-white transition-colors">
+                        Download CV <i data-lucide="download" class="w-4 h-4"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="py-32 bg-[#0a0a0a] border-y border-white/5 relative">
+        <div class="container mx-auto px-6">
+            <h2 class="text-acid-green font-mono mb-16 text-center">02. / WHAT I DO</h2>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-[#121212] p-8 border border-white/5 hover:border-acid-green group transition-all duration-300 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                        <i data-lucide="layout" class="w-24 h-24 text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold font-display mb-4 text-white group-hover:text-acid-green">Frontend Architecture</h3>
+                    <p class="text-gray-400 leading-relaxed mb-6">
+                        Crafting responsive, pixel-perfect user interfaces using modern libraries like React and Tailwind. I focus on smooth animations and accessibility.
+                    </p>
+                    <ul class="text-sm font-mono text-gray-500 space-y-2">
+                        <li class="flex items-center gap-2"><div class="w-1 h-1 bg-acid-green"></div> SPA Development</li>
+                        <li class="flex items-center gap-2"><div class="w-1 h-1 bg-acid-green"></div> Interactive UI/UX</li>
+                        <li class="flex items-center gap-2"><div class="w-1 h-1 bg-acid-green"></div> Performance Tuning</li>
+                    </ul>
+                </div>
+
+                <div class="bg-[#121212] p-8 border border-white/5 hover:border-acid-green group transition-all duration-300 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                        <i data-lucide="server" class="w-24 h-24 text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold font-display mb-4 text-white group-hover:text-acid-green">Backend Development</h3>
+                    <p class="text-gray-400 leading-relaxed mb-6">
+                        Building robust server-side logic and scalable APIs using Laravel, Node.js, and PHP. Security and data integrity are my top priorities.
+                    </p>
+                    <ul class="text-sm font-mono text-gray-500 space-y-2">
+                        <li class="flex items-center gap-2"><div class="w-1 h-1 bg-acid-green"></div> RESTful API Design</li>
+                        <li class="flex items-center gap-2"><div class="w-1 h-1 bg-acid-green"></div> Database Management</li>
+                        <li class="flex items-center gap-2"><div class="w-1 h-1 bg-acid-green"></div> Server Logic</li>
+                    </ul>
+                </div>
+
+                <div class="bg-[#121212] p-8 border border-white/5 hover:border-acid-green group transition-all duration-300 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                        <i data-lucide="database" class="w-24 h-24 text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold font-display mb-4 text-white group-hover:text-acid-green">Full Stack Solutions</h3>
+                    <p class="text-gray-400 leading-relaxed mb-6">
+                        Handling the entire development lifecycle, from database design (MySQL/MongoDB) to deployment. Seamless integration between front and back ends.
+                    </p>
+                    <ul class="text-sm font-mono text-gray-500 space-y-2">
+                        <li class="flex items-center gap-2"><div class="w-1 h-1 bg-acid-green"></div> System Architecture</li>
+                        <li class="flex items-center gap-2"><div class="w-1 h-1 bg-acid-green"></div> Third-party Integrations</li>
+                        <li class="flex items-center gap-2"><div class="w-1 h-1 bg-acid-green"></div> E-commerce Solutions</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-[#050505]">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-display font-bold mb-4">Why Work With Me?</h2>
+                <p class="text-gray-400">Beyond the code, here is the value I bring to every project.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="p-6 border-l-2 border-acid-green bg-white/5 backdrop-blur-sm">
+                    <h4 class="text-xl font-bold text-white mb-2">Lightning Fast</h4>
+                    <p class="text-sm text-gray-400">I prioritize performance optimization, ensuring your applications load instantly and run smoothly on all devices.</p>
+                </div>
+                <div class="p-6 border-l-2 border-acid-green bg-white/5 backdrop-blur-sm">
+                    <h4 class="text-xl font-bold text-white mb-2">Clean Code</h4>
+                    <p class="text-sm text-gray-400">Maintainable, scalable, and well-documented code is my standard. Future-proof development that is easy to upgrade.</p>
+                </div>
+                <div class="p-6 border-l-2 border-acid-green bg-white/5 backdrop-blur-sm">
+                    <h4 class="text-xl font-bold text-white mb-2">Clear Communication</h4>
+                    <p class="text-sm text-gray-400">No tech jargon. I keep you updated at every stage of the development process with clear, transparent communication.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="py-32">
+        <div class="container mx-auto px-6">
+            <h2 class="text-acid-green font-mono mb-12">03. / TECH STACK</h2>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="group p-6 border border-white/10 hover:border-acid-green hover:bg-white/5 transition-all duration-300">
+                    <i data-lucide="code-2" class="w-8 h-8 text-white mb-4 group-hover:text-acid-green"></i>
+                    <h4 class="font-bold text-xl mb-2">Frontend</h4>
+                    <p class="text-sm text-gray-400">React, HTML5, CSS3, Tailwind, Bootstrap, JavaScript</p>
+                </div>
+
+                <div class="group p-6 border border-white/10 hover:border-acid-green hover:bg-white/5 transition-all duration-300">
+                    <i data-lucide="database" class="w-8 h-8 text-white mb-4 group-hover:text-acid-green"></i>
+                    <h4 class="font-bold text-xl mb-2">Backend</h4>
+                    <p class="text-sm text-gray-400">PHP, Laravel, Nodejs, Expressjs, REST APIs</p>
+                </div>
+
+                <div class="group p-6 border border-white/10 hover:border-acid-green hover:bg-white/5 transition-all duration-300">
+                    <i data-lucide="server" class="w-8 h-8 text-white mb-4 group-hover:text-acid-green"></i>
+                    <h4 class="font-bold text-xl mb-2">Database</h4>
+                    <p class="text-sm text-gray-400">MySQL, MongoDB, phpMyAdmin</p>
+                </div>
+
+                <div class="group p-6 border border-white/10 hover:border-acid-green hover:bg-white/5 transition-all duration-300">
+                    <i data-lucide="wrench" class="w-8 h-8 text-white mb-4 group-hover:text-acid-green"></i>
+                    <h4 class="font-bold text-xl mb-2">Tools</h4>
+                    <p class="text-sm text-gray-400">Git, VS Code, Postman</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="py-32 bg-[#0a0a0a] border-y border-white/5 relative overflow-hidden">
+        <div class="container mx-auto px-6">
+            <h2 class="text-acid-green font-mono mb-16 text-center">04. / MY JOURNEY</h2>
+            
+            <div class="relative max-w-4xl mx-auto">
+                <div class="absolute left-0 md:left-1/2 top-0 h-full w-[1px] bg-white/10 transform md:-translate-x-1/2 ml-4 md:ml-0"></div>
+
+                <div class="relative flex flex-col md:flex-row gap-8 mb-16 group">
+                    <div class="md:w-1/2 md:text-right md:pr-12 pl-12 md:pl-0">
+                        <span class="text-acid-green font-mono text-sm mb-1 block">2024 - Present</span>
+                        <h4 class="text-2xl font-bold text-white mb-2">Computer Science</h4>
+                        <p class="text-gray-400 text-sm">Pace College of Advance Studies</p>
+                        <p class="text-gray-500 text-sm mt-2">Currently pursuing a bachelor's degree in Computer Science, focusing on advanced algorithms and software engineering principles.</p>
+                    </div>
+                    <div class="absolute left-0 md:left-1/2 top-0 w-8 h-8 bg-black border-2 border-acid-green rounded-full transform md:-translate-x-1/2 timeline-dot z-10 ml-0 md:ml-0"></div>
+                    <div class="md:w-1/2 md:pl-12 hidden md:block"></div>
+                </div>
+
+                <div class="relative flex flex-col md:flex-row gap-8 mb-16 group">
+                    <div class="md:w-1/2 md:pr-12 hidden md:block"></div>
+                    <div class="absolute left-0 md:left-1/2 top-0 w-8 h-8 bg-black border-2 border-acid-green rounded-full transform md:-translate-x-1/2 timeline-dot z-10 ml-0 md:ml-0"></div>
+                    <div class="md:w-1/2 md:pl-12 pl-12">
+                        <span class="text-acid-green font-mono text-sm mb-1 block">2023</span>
+                        <h4 class="text-2xl font-bold text-white mb-2">Web Dev Diploma</h4>
+                        <p class="text-gray-400 text-sm">Aptech Education PK</p>
+                        <p class="text-gray-500 text-sm mt-2">Completed an intensive diploma in Web Development. Mastered HTML, CSS, JavaScript, and PHP basics, building a strong foundation.</p>
+                    </div>
+                </div>
+
+                <div class="relative flex flex-col md:flex-row gap-8 group">
+                    <div class="md:w-1/2 md:text-right md:pr-12 pl-12 md:pl-0">
+                        <span class="text-acid-green font-mono text-sm mb-1 block">2023 - Present</span>
+                        <h4 class="text-2xl font-bold text-white mb-2">Freelance Developer</h4>
+                        <p class="text-gray-400 text-sm">Remote / Upwork</p>
+                        <p class="text-gray-500 text-sm mt-2">Working with various clients to build custom websites and web applications. Developed 'Build Your Dream' and 'StreamTrace' as flagship projects.</p>
+                    </div>
+                    <div class="absolute left-0 md:left-1/2 top-0 w-8 h-8 bg-black border-2 border-acid-green rounded-full transform md:-translate-x-1/2 timeline-dot z-10 ml-0 md:ml-0"></div>
+                    <div class="md:w-1/2 md:pl-12 hidden md:block"></div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="py-32">
+        <div class="container mx-auto px-6">
+            <h2 class="text-acid-green font-mono mb-16 text-center">05. / MY WORKFLOW</h2>
+            
+            <div class="grid md:grid-cols-4 gap-8 relative">
+                <div class="workflow-step relative z-10 text-center">
+                    <div class="w-16 h-16 rounded-full border-2 border-acid-green bg-black flex items-center justify-center mx-auto mb-6 text-xl font-bold text-white group hover:bg-acid-green hover:text-black transition-all">01</div>
+                    <h4 class="text-xl font-bold mb-2 text-white">Discover</h4>
+                    <p class="text-sm text-gray-400">Analyze requirements, understand the problem, and plan the architecture.</p>
+                </div>
+                <div class="workflow-step relative z-10 text-center">
+                    <div class="w-16 h-16 rounded-full border-2 border-white/20 bg-black flex items-center justify-center mx-auto mb-6 text-xl font-bold text-white group hover:border-acid-green transition-all">02</div>
+                    <h4 class="text-xl font-bold mb-2 text-white">Design</h4>
+                    <p class="text-sm text-gray-400">Create wireframes, database schemas, and system logic for scalability.</p>
+                </div>
+                <div class="workflow-step relative z-10 text-center">
+                    <div class="w-16 h-16 rounded-full border-2 border-white/20 bg-black flex items-center justify-center mx-auto mb-6 text-xl font-bold text-white group hover:border-acid-green transition-all">03</div>
+                    <h4 class="text-xl font-bold mb-2 text-white">Develop</h4>
+                    <p class="text-sm text-gray-400">Write clean, efficient code using the best tools for the job (React/Laravel).</p>
+                </div>
+                <div class="workflow-step relative z-10 text-center">
+                    <div class="w-16 h-16 rounded-full border-2 border-white/20 bg-black flex items-center justify-center mx-auto mb-6 text-xl font-bold text-white group hover:border-acid-green transition-all">04</div>
+                    <h4 class="text-xl font-bold mb-2 text-white">Deploy</h4>
+                    <p class="text-sm text-gray-400">Test rigorously, optimize performance, and launch the final product.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="py-32 bg-[#0a0a0a] border-y border-white/5">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-8 md:mb-16">
+                <div class="mb-6 md:mb-0">
+                    <h2 class="text-acid-green font-mono mb-2">06. / SELECTED WORKS</h2>
+                    <h3 class="text-5xl font-display font-bold">Recent Deploys</h3>
+                </div>
+                
+                <div class="flex flex-wrap gap-2 md:gap-4" id="project-filters">
+                    <button class="filter-btn active px-4 py-2 border border-white/20 text-sm font-bold uppercase transition-all hover:border-acid-green hover:text-acid-green" data-filter="all">All</button>
+                    <button class="filter-btn px-4 py-2 border border-white/20 text-white text-sm font-bold uppercase transition-all hover:border-acid-green hover:text-acid-green" data-filter="website">Websites</button>
+                    <button class="filter-btn px-4 py-2 border border-white/20 text-white text-sm font-bold uppercase transition-all hover:border-acid-green hover:text-acid-green" data-filter="application">Apps</button>
+                    <button class="filter-btn px-4 py-2 border border-white/20 text-white text-sm font-bold uppercase transition-all hover:border-acid-green hover:text-acid-green" data-filter="graphics">Graphic Design</button>
+                    <button class="filter-btn px-4 py-2 border border-white/20 text-white text-sm font-bold uppercase transition-all hover:border-acid-green hover:text-acid-green" data-filter="video">Video Editing</button>
+                    <button class="filter-btn px-4 py-2 border border-white/20 text-white text-sm font-bold uppercase transition-all hover:border-acid-green hover:text-acid-green" data-filter="logo">Logo</button>
+                </div>
+            </div>
+
+            <div class="hidden md:block w-full h-[1px] bg-white/20 mb-12"></div>
+
+            <div class="flex flex-col gap-24" id="projects-grid">
+                
+                 <div class="group relative grid md:grid-cols-12 gap-8 items-center project-card" data-category="website application">
+    <div class="md:col-span-7 z-10 order-2 md:order-1">
+        <h4 class="text-3xl font-display font-bold mb-4 group-hover:text-acid-green transition-colors">Ather Mother Care</h4>
+        <div class="bg-[#1a1a1a] p-6 rounded-sm border border-white/5 shadow-xl mb-6 backdrop-blur-sm bg-opacity-80">
+            <p class="text-gray-300">
+                A comprehensive e-commerce and healthcare platform dedicated to mother and baby care products. Features a streamlined shopping experience, secure checkout, and a user-friendly interface tailored for parents.
+            </p>
+        </div>
+        <ul class="flex flex-wrap gap-4 font-mono text-sm text-acid-green mb-8">
+            <li>E-commerce</li>
+            <li>React / Next.js</li>
+            <li>Tailwind CSS</li>
+            <li>Responsive Design</li>
+        </ul>
+        <div class="flex flex-wrap gap-4">
+            <a href="https://athermothercare.pk" target="_blank" class="px-6 py-2 border border-white/20 text-white font-bold text-sm uppercase hover:border-acid-green hover:text-acid-green transition-all flex items-center gap-2">
+                <i data-lucide="external-link" class="w-4 h-4"></i> Visit Site
+            </a>
+            <a href="https://athermothercare.pk" target="_blank" class="px-6 py-2 bg-white/5 border border-white/20 text-white font-bold text-sm uppercase hover:bg-acid-green hover:text-black hover:border-acid-green transition-all flex items-center gap-2">
+                <i data-lucide="eye" class="w-4 h-4"></i> Live Demo
+            </a>
+        </div>
+    </div>
+    <div class="md:col-span-5 relative h-[300px] border border-white/10 bg-gradient-to-br from-gray-900 to-black overflow-hidden group-hover:border-acid-green/50 transition-all duration-500 order-1 md:order-2">
+        <div class="absolute inset-0 flex items-center justify-center">
+            <i data-lucide="shopping-cart" class="w-24 h-24 text-gray-800 group-hover:text-acid-green group-hover:scale-110 transition-all duration-500"></i>
+        </div>
+        <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:20px_20px]"></div>
+    </div>
+</div>
+                <div class="group relative grid md:grid-cols-12 gap-8 items-center project-card" data-category="website application">
+                    <div class="md:col-span-7 z-10 order-2 md:order-1">
+                        <h4 class="text-3xl font-display font-bold mb-4 group-hover:text-acid-green transition-colors">Build Your Dream</h4>
+                        <div class="bg-[#1a1a1a] p-6 rounded-sm border border-white/5 shadow-xl mb-6 backdrop-blur-sm bg-opacity-80">
+                            <p class="text-gray-300">
+                                A Virtual PC Builder website enabling users to assemble custom PCs by selecting compatible components. Features a complex logic system for compatibility and an integrated AI performance check.
+                            </p>
+                        </div>
+                        <ul class="flex flex-wrap gap-4 font-mono text-sm text-acid-green mb-8">
+                            <li>PHP</li>
+                            <li>MySQL</li>
+                            <li>Bootstrap</li>
+                            <li>AI Integration</li>
+                        </ul>
+                        <div class="flex flex-wrap gap-4">
+                            <a href="https://github.com/Huzaifa-ali-dev/Build-Your-Dream.git" class="px-6 py-2 border border-white/20 text-white font-bold text-sm uppercase hover:border-acid-green hover:text-acid-green transition-all flex items-center gap-2">
+                                <i data-lucide="github" class="w-4 h-4"></i> Code
+                            </a>
+                            <a href="https://www.youtube.com/watch?v=HaXNurafznY" target="_blank" class="px-6 py-2 bg-white/5 border border-white/20 text-white font-bold text-sm uppercase hover:bg-acid-green hover:text-black hover:border-acid-green transition-all flex items-center gap-2">
+                                <i data-lucide="youtube" class="w-4 h-4"></i> Watch Demo
+                            </a>
+                        </div>
+                    </div>
+                    <div class="md:col-span-5 relative h-[300px] border border-white/10 bg-gradient-to-br from-gray-900 to-black overflow-hidden group-hover:border-acid-green/50 transition-all duration-500 order-1 md:order-2">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <i data-lucide="monitor" class="w-24 h-24 text-gray-800 group-hover:text-acid-green group-hover:scale-110 transition-all duration-500"></i>
+                        </div>
+                        <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:20px_20px]"></div>
+                    </div>
+                </div>
+
+                <div class="group relative grid md:grid-cols-12 gap-8 items-center project-card" data-category="website">
+                    <div class="md:col-span-5 relative h-[300px] border border-white/10 bg-gradient-to-br from-gray-900 to-black overflow-hidden group-hover:border-acid-green/50 transition-all duration-500">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <i data-lucide="play-circle" class="w-24 h-24 text-gray-800 group-hover:text-acid-green group-hover:scale-110 transition-all duration-500"></i>
+                        </div>
+                        <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:20px_20px]"></div>
+                    </div>
+                    <div class="md:col-span-7 z-10 text-right md:text-left">
+                        <h4 class="text-3xl font-display font-bold mb-4 group-hover:text-acid-green transition-colors">TrueKinspection.com</h4>
+                        <div class="bg-[#1a1a1a] p-6 rounded-sm border border-white/5 shadow-xl mb-6 backdrop-blur-sm bg-opacity-80 md:-ml-12 z-20 relative">
+                            <p class="text-gray-300">
+                                Instant Vehicle Insights: A streamlined platform delivering detailed inspection reports via a single VIN lookup
+                            </p>
+                        </div>
+                        <ul class="flex flex-wrap gap-4 font-mono text-sm text-acid-green mb-8 justify-end md:justify-start">
+                             <li>Next.js</li>
+                            <li>MongoDB</li>
+                            <li>Bootstrap</li>
+                            <li>AI Integration</li>
+                        </ul>
+                        <div class="flex flex-wrap gap-4 justify-end md:justify-start">
+                             <a href="https://github.com/Huzii-ali-123/truek-inspection.git" class="px-6 py-2 border border-white/20 text-white font-bold text-sm uppercase hover:border-acid-green hover:text-acid-green transition-all flex items-center gap-2">
+                                <i data-lucide="github" class="w-4 h-4"></i> Code
+                            </a>
+                             <a href="https://www.truekinspection.com" target="_blank" class="px-6 py-2 bg-acid-green text-black font-bold text-sm uppercase hover:bg-white hover:text-black transition-all flex items-center gap-2">
+                                <i data-lucide="external-link" class="w-4 h-4"></i> Live Site
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                 <div class="group relative grid md:grid-cols-12 gap-8 items-center project-card" data-category="website application">
+                    <div class="md:col-span-7 z-10 order-2 md:order-1">
+                        <h4 class="text-3xl font-display font-bold mb-4 group-hover:text-acid-green transition-colors">StreamTrace</h4>
+                        <div class="bg-[#1a1a1a] p-6 rounded-sm border border-white/5 shadow-xl mb-6 backdrop-blur-sm bg-opacity-80">
+                            <p class="text-gray-300">
+                                A comprehensive dashboard for managing streaming services and subscriptions. Includes a secure login system, cost tracking, and subscription renewal alerts.
+                            </p>
+                        </div>
+                        <ul class="flex flex-wrap gap-4 font-mono text-sm text-acid-green mb-8">
+                            <li>React.js</li>
+                            <li>MongoDB</li>
+                            <li>Express.js</li>
+                            <li>Nodejs</li>
+                            <li>Dashboard</li>
+                            <li>Auth</li>
+                        </ul>
+                        <div class="flex flex-wrap gap-4">
+                           <a href="https://github.com/Huzaifa-ali-dev/vite-react.git" class="px-6 py-2 border border-white/20 text-white font-bold text-sm uppercase hover:border-acid-green hover:text-acid-green transition-all flex items-center gap-2">
+                                <i data-lucide="github" class="w-4 h-4"></i> Code
+                            </a>
+                            <a href="https://www.youtube.com/watch?v=Tj6tMyf3QCk" target="_blank" class="px-6 py-2 bg-white/5 border border-white/20 text-white font-bold text-sm uppercase hover:bg-acid-green hover:text-black hover:border-acid-green transition-all flex items-center gap-2">
+                                <i data-lucide="youtube" class="w-4 h-4"></i> Watch Demo
+                            </a>
+                        </div>
+                    </div>
+                    <div class="md:col-span-5 relative h-[300px] border border-white/10 bg-gradient-to-br from-gray-900 to-black overflow-hidden group-hover:border-acid-green/50 transition-all duration-500 order-1 md:order-2">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <i data-lucide="monitor" class="w-24 h-24 text-gray-800 group-hover:text-acid-green group-hover:scale-110 transition-all duration-500"></i>
+                        </div>
+                        <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:20px_20px]"></div>
+                    </div>
+                </div>
+
+                <div class="group relative grid md:grid-cols-12 gap-8 items-center project-card" data-category="graphics logo">
+                    <div class="md:col-span-5 relative h-[300px] border border-white/10 bg-gradient-to-br from-gray-900 to-black overflow-hidden group-hover:border-acid-green/50 transition-all duration-500">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <i data-lucide="palette" class="w-24 h-24 text-gray-800 group-hover:text-acid-green group-hover:scale-110 transition-all duration-500"></i>
+                        </div>
+                         <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:20px_20px]"></div>
+                    </div>
+                    <div class="md:col-span-7 z-10 text-right md:text-left">
+                        <h4 class="text-3xl font-display font-bold mb-4 group-hover:text-acid-green transition-colors">Brand Identity Pack</h4>
+                        <div class="bg-[#1a1a1a] p-6 rounded-sm border border-white/5 shadow-xl mb-6 backdrop-blur-sm bg-opacity-80 md:-ml-12 z-20 relative">
+                            <p class="text-gray-300">
+                                Complete visual identity redesign for a fintech startup. Includes logo, typography guidelines, and social media assets.
+                            </p>
+                        </div>
+                        <ul class="flex flex-wrap gap-4 font-mono text-sm text-acid-green mb-8 justify-end md:justify-start">
+                             <li>Illustrator</li>
+                             <li>Photoshop</li>
+                             <li>Branding</li>
+                             <li>Vector Art</li>
+                        </ul>
+                         <div class="flex flex-wrap gap-4 justify-end md:justify-start">
+                            <span class="px-6 py-2 border border-white/20 text-gray-400 font-bold text-sm uppercase flex items-center gap-2 cursor-not-allowed">
+                                <i data-lucide="lock" class="w-4 h-4"></i> Private
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group relative grid md:grid-cols-12 gap-8 items-center project-card" data-category="video">
+                    <div class="md:col-span-7 z-10 order-2 md:order-1">
+                        <h4 class="text-3xl font-display font-bold mb-4 group-hover:text-acid-green transition-colors">Tech Promo Reel</h4>
+                        <div class="bg-[#1a1a1a] p-6 rounded-sm border border-white/5 shadow-xl mb-6 backdrop-blur-sm bg-opacity-80">
+                            <p class="text-gray-300">
+                                A high-energy promotional video for a software launch. Features motion graphics, kinetic typography, and sound design.
+                            </p>
+                        </div>
+                        <ul class="flex flex-wrap gap-4 font-mono text-sm text-acid-green mb-8">
+                            <li>Premiere Pro</li>
+                            <li>After Effects</li>
+                            <li>Sound Design</li>
+                        </ul>
+                         <div class="flex flex-wrap gap-4">
+                            <span class="px-6 py-2 border border-white/20 text-gray-400 font-bold text-sm uppercase flex items-center gap-2 cursor-not-allowed">
+                                <i data-lucide="lock" class="w-4 h-4"></i> Private
+                            </span>
+                        </div>
+                    </div>
+                    <div class="md:col-span-5 relative h-[300px] border border-white/10 bg-gradient-to-br from-gray-900 to-black overflow-hidden group-hover:border-acid-green/50 transition-all duration-500 order-1 md:order-2">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <i data-lucide="film" class="w-24 h-24 text-gray-800 group-hover:text-acid-green group-hover:scale-110 transition-all duration-500"></i>
+                        </div>
+                        <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:20px_20px]"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-32 relative overflow-hidden">
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                
+                <div>
+                    <h2 class="text-acid-green font-mono mb-4">07. / WHAT'S NEXT?</h2>
+                    <h3 class="text-5xl md:text-6xl font-display font-bold mb-8">Let's Work Together</h3>
+                    <p class="text-gray-400 text-lg mb-12 leading-relaxed">
+                        I'm currently looking for new opportunities to build scalable web applications. Have a project in mind or just want to discuss the latest tech trends? Drop me a message!
+                    </p>
+                    
+                    <div class="flex flex-col gap-6">
+                        <div class="flex items-center gap-4 group">
+                            <div class="w-12 h-12 border border-white/20 flex items-center justify-center group-hover:border-acid-green group-hover:bg-acid-green/10 transition-all">
+                                <i data-lucide="mail" class="text-acid-green"></i>
+                            </div>
+                            <div>
+                                <span class="block text-sm text-gray-500 font-mono">Mail Me</span>
+                                <a href="mailto:huzaifadx780@gmail.com" class="text-xl font-bold hover:text-acid-green transition-colors">huzaifadx780@gmail.com</a>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-4 group">
+                            <div class="w-12 h-12 border border-white/20 flex items-center justify-center group-hover:border-acid-green group-hover:bg-acid-green/10 transition-all">
+                                <i data-lucide="phone" class="text-acid-green"></i>
+                            </div>
+                            <div>
+                                <span class="block text-sm text-gray-500 font-mono">Call Me</span>
+                                <a href="tel:+923321335442" class="text-xl font-bold hover:text-acid-green transition-colors">+92 332 1335442</a>
+                            </div>
+                        </div>
+
+                        <!-- Added WhatsApp Direct Link -->
+                        <div class="flex items-center gap-4 group">
+                            <div class="w-12 h-12 border border-white/20 flex items-center justify-center group-hover:border-acid-green group-hover:bg-acid-green/10 transition-all">
+                                <i data-lucide="message-circle" class="text-acid-green"></i>
+                            </div>
+                            <div>
+                                <span class="block text-sm text-gray-500 font-mono">WhatsApp</span>
+                                <a href="https://wa.me/923321335442" target="_blank" class="text-xl font-bold hover:text-acid-green transition-colors">Chat Directly</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-12 flex gap-6">
+                        <a href="https://github.com/Huzii-ali-123" class="text-gray-400 hover:text-acid-green hover:-translate-y-1 transition-all"><i data-lucide="github" class="w-6 h-6"></i></a>
+                        <a href="https://www.linkedin.com/in/huzaifa-ali-dev/" class="text-gray-400 hover:text-acid-green hover:-translate-y-1 transition-all"><i data-lucide="linkedin" class="w-6 h-6"></i></a>
+                    </div>
+                </div>
+
+                <!-- Replaced Form with Calendly Link Card -->
+                <div class="bg-[#121212] p-10 border border-white/10 relative group">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-acid-green to-neon-purple opacity-20 group-hover:opacity-40 blur transition duration-500"></div>
+                    
+                    <div class="relative z-10 text-center">
+                        <div class="w-20 h-20 bg-white/5 border border-acid-green/30 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i data-lucide="calendar" class="w-10 h-10 text-acid-green"></i>
+                        </div>
+                        <h4 class="text-3xl font-display font-bold mb-4">Book a Strategy Session</h4>
+                        <p class="text-gray-400 mb-8">Skip the back-and-forth emails. Pick a time that works for you, and let's discuss your project goals directly on a call.</p>
+                        
+                        <!-- Replace the # with your copied Calendly link -->
+                        <a href="https://calendly.com/huzaifadx780/starter-meeting" target="_blank" class="block w-full bg-acid-green text-black font-bold uppercase tracking-widest py-5 hover:bg-white transition-all border border-transparent">
+                            Schedule a Call
+                        </a>
+                        
+                        <p class="mt-6 text-xs font-mono text-gray-500 uppercase tracking-widest">Powered by Calendly</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-8 border-t border-white/10 text-center">
+        <p class="font-mono text-sm text-gray-500">
+            Designed & Built by <span class="text-acid-green">Huzaifa Ali</span> <br>
+            <span class="text-xs">© 2026 - All Rights Reserved</span>
+        </p>
+    </footer>
+
+    <div class="progress-wrap" id="progress-wrap">
+        <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+            <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" style="transition: stroke-dashoffset 10ms linear; stroke-dasharray: 307.919, 307.919; stroke-dashoffset: 307.919;"></path>
+        </svg>
+        <i data-lucide="arrow-up" class="absolute text-acid-green w-6 h-6 arrow-icon"></i>
+    </div>
+
+    <script>
+        // --- Butter Smooth Scrolling (Lenis) ---
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            direction: 'vertical',
+            gestureDirection: 'vertical',
+            smooth: true,
+            mouseMultiplier: 1,
+            smoothTouch: false,
+            touchMultiplier: 2,
+            infinite: false,
+        });
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        // Bind Lenis to ScrollTrigger
+        lenis.on('scroll', ScrollTrigger.update);
+        gsap.ticker.add((time) => {
+            lenis.raf(time * 1000);
+        });
+
+        lucide.createIcons();
+
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+        let isMenuOpen = false;
+
+        btn.addEventListener('click', () => {
+            isMenuOpen = !isMenuOpen;
+            if (isMenuOpen) {
+                menu.classList.remove('translate-x-full');
+                menuIcon.setAttribute('data-lucide', 'x');
+            } else {
+                menu.classList.add('translate-x-full');
+                menuIcon.setAttribute('data-lucide', 'menu');
+            }
+            lucide.createIcons();
+        });
+
+        menu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                isMenuOpen = false;
+                menu.classList.add('translate-x-full');
+                menuIcon.setAttribute('data-lucide', 'menu');
+                lucide.createIcons();
+            });
+        });
+
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const projects = document.querySelectorAll('.project-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => {
+                    b.classList.remove('active', 'bg-acid-green', 'text-black', 'border-acid-green');
+                    b.classList.add('text-white', 'border-white/20');
+                });
+                
+                btn.classList.add('active');
+                const filterValue = btn.getAttribute('data-filter');
+
+                projects.forEach(project => {
+                    const categories = project.getAttribute('data-category');
+                    if (filterValue === 'all' || (categories && categories.includes(filterValue))) {
+                        project.style.display = 'grid';
+                        gsap.fromTo(project, {opacity: 0, y: 20}, {opacity: 1, y: 0, duration: 0.4});
+                    } else {
+                        project.style.display = 'none';
+                    }
+                });
+                ScrollTrigger.refresh();
+            });
+        });
+
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+        
+        window.addEventListener('mousemove', (e) => {
+            const posX = e.clientX;
+            const posY = e.clientY;
+            cursorDot.style.left = `${posX}px`;
+            cursorDot.style.top = `${posY}px`;
+            cursorOutline.style.left = `${posX}px`;
+            cursorOutline.style.top = `${posY}px`;
+        });
+
+        document.querySelectorAll('a, button, .progress-wrap, .filter-btn').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursorOutline.style.width = '60px';
+                cursorOutline.style.height = '60px';
+                cursorOutline.style.backgroundColor = 'rgba(204, 255, 0, 0.1)';
+            });
+            el.addEventListener('mouseleave', () => {
+                cursorOutline.style.width = '40px';
+                cursorOutline.style.height = '40px';
+                cursorOutline.style.backgroundColor = 'transparent';
+            });
+        });
+
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.getElementById('canvas-container').appendChild(renderer.domElement);
+
+        const geometry = new THREE.IcosahedronGeometry(2, 1);
+        const material = new THREE.MeshBasicMaterial({ 
+            color: 0xccff00, 
+            wireframe: true,
+            transparent: true,
+            opacity: 0.15
+        });
+
+        const cube = new THREE.Mesh(geometry, material);
+        scene.add(cube);
+
+        const particlesGeometry = new THREE.BufferGeometry();
+        const particlesCount = 200;
+        const posArray = new Float32Array(particlesCount * 3);
+        for(let i = 0; i < particlesCount * 3; i++) {
+            posArray[i] = (Math.random() - 0.5) * 15;
+        }
+        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+        const particlesMaterial = new THREE.PointsMaterial({
+            size: 0.02,
+            color: 0xccff00,
+            transparent: true,
+            opacity: 0.4
+        });
+        const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+        scene.add(particlesMesh);
+
+        camera.position.z = 5;
+
+        let mouseX = 0;
+        let mouseY = 0;
+        document.addEventListener('mousemove', (event) => {
+            mouseX = (event.clientX - window.innerWidth / 2);
+            mouseY = (event.clientY - window.innerHeight / 2);
+        });
+
+        const clock = new THREE.Clock();
+        function animate() {
+            const elapsedTime = clock.getElapsedTime();
+            cube.rotation.y += 0.005;
+            cube.rotation.x += 0.002;
+            cube.position.y = Math.sin(elapsedTime * 0.5) * 0.2;
+            particlesMesh.rotation.y = -elapsedTime * 0.05;
+            renderer.render(scene, camera);
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.utils.toArray('section').forEach(section => {
+            gsap.from(section.children, {
+                opacity: 0,
+                y: 50,
+                duration: 1,
+                stagger: 0.2,
+                scrollTrigger: {
+                    trigger: section,
+                    start: "top 80%",
+                    toggleActions: "play none none reverse"
+                }
+            });
+        });
+
+        const counters = document.querySelectorAll('.counter');
+        counters.forEach(counter => {
+            const updateCount = () => {
+                const target = +counter.getAttribute('data-target');
+                const count = +counter.innerText;
+                const inc = target / 100;
+                if(count < target) {
+                    counter.innerText = Math.ceil(count + inc);
+                    setTimeout(updateCount, 20);
+                } else {
+                    counter.innerText = target;
+                }
+            }
+            ScrollTrigger.create({
+                trigger: counter,
+                start: "top 90%",
+                onEnter: updateCount
+            });
+        });
+
+        const progressWrap = document.querySelector('.progress-wrap');
+        const progressPath = document.querySelector('.progress-wrap path');
+        const pathLength = progressPath.getTotalLength();
+        progressPath.style.transition = 'none';
+        progressPath.style.strokeDasharray = `${pathLength} ${pathLength}`;
+        progressPath.style.strokeDashoffset = pathLength;
+        progressPath.getBoundingClientRect();
+        progressPath.style.transition = 'stroke-dashoffset 10ms linear';
+
+        const updateProgress = () => {
+            const scroll = window.pageYOffset;
+            const height = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = pathLength - (scroll * pathLength / height);
+            progressPath.style.strokeDashoffset = progress;
+            if (scroll > 50) {
+                progressWrap.classList.add('active-progress');
+            } else {
+                progressWrap.classList.remove('active-progress');
+            }
+        }
+        window.addEventListener('scroll', updateProgress);
+        updateProgress();
+
+        progressWrap.addEventListener('click', (event) => {
+            event.preventDefault();
+            lenis.scrollTo(0);
+        });
+
+    </script>
+</body>
+</html>

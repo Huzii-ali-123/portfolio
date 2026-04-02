@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Huzaifa Ali | Full Stack Dev</title>
-    <meta name="description" content="Portfolio of Huzaifa Ali, a Full Stack Developer specializing in PHP, Laravel, React, and Modern Web Technologies.">
+    <title>Huzaifa Ali | Full Stack & 3D Dev</title>
+    <meta name="description" content="Portfolio of Huzaifa Ali, a Full Stack Developer specializing in Next.js, MERN Stack, Three.js, and Laravel.">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -264,24 +264,24 @@
             </a>
             
             <div class="hidden md:flex gap-8 text-sm uppercase tracking-widest font-bold">
-                <a href="#about" class="hover:text-acid-green transition-colors relative group">About
+                <a href="#about" class="nav-link hover:text-acid-green transition-colors relative group">About
                     <span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-acid-green transition-all group-hover:w-full"></span>
                 </a>
-                <a href="#services" class="hover:text-acid-green transition-colors relative group">Services
+                <a href="#services" class="nav-link hover:text-acid-green transition-colors relative group">Services
                     <span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-acid-green transition-all group-hover:w-full"></span>
                 </a>
-                <a href="#experience" class="hover:text-acid-green transition-colors relative group">Exp.
+                <a href="#experience" class="nav-link hover:text-acid-green transition-colors relative group">Exp.
                     <span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-acid-green transition-all group-hover:w-full"></span>
                 </a>
-                <a href="#projects" class="hover:text-acid-green transition-colors relative group">Works
+                <a href="#projects" class="nav-link hover:text-acid-green transition-colors relative group">Works
                     <span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-acid-green transition-all group-hover:w-full"></span>
                 </a>
-                <a href="#contact" class="hover:text-acid-green transition-colors relative group">Contact
+                <a href="#contact" class="nav-link hover:text-acid-green transition-colors relative group">Contact
                     <span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-acid-green transition-all group-hover:w-full"></span>
                 </a>
             </div>
 
-            <button onclick="document.getElementById('contact').scrollIntoView()" class="hidden md:block px-6 py-2 border border-acid-green text-acid-green font-bold text-sm uppercase hover:bg-acid-green hover:text-black transition-all duration-300">
+            <button id="cta-talk" class="hidden md:block px-6 py-2 border border-acid-green text-acid-green font-bold text-sm uppercase hover:bg-acid-green hover:text-black transition-all duration-300">
                 Let's Talk
             </button>
             
@@ -292,11 +292,11 @@
     </nav>
 
     <div id="mobile-menu" class="fixed inset-0 bg-black/95 backdrop-blur-xl z-40 transform translate-x-full transition-transform duration-300 flex flex-col justify-center items-center gap-8 text-4xl font-display font-bold">
-        <a href="#about" class="hover:text-acid-green hover:italic transition-all">ABOUT</a>
-        <a href="#services" class="hover:text-acid-green hover:italic transition-all">SERVICES</a>
-        <a href="#experience" class="hover:text-acid-green hover:italic transition-all">EXPERIENCE</a>
-        <a href="#projects" class="hover:text-acid-green hover:italic transition-all">WORKS</a>
-        <a href="#contact" class="hover:text-acid-green hover:italic transition-all">CONTACT</a>
+        <a href="#about" class="nav-link hover:text-acid-green hover:italic transition-all">ABOUT</a>
+        <a href="#services" class="nav-link hover:text-acid-green hover:italic transition-all">SERVICES</a>
+        <a href="#experience" class="nav-link hover:text-acid-green hover:italic transition-all">EXPERIENCE</a>
+        <a href="#projects" class="nav-link hover:text-acid-green hover:italic transition-all">WORKS</a>
+        <a href="#contact" class="nav-link hover:text-acid-green hover:italic transition-all">CONTACT</a>
     </div>
 
     <header class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
@@ -304,15 +304,15 @@
             <div class="max-w-4xl">
                 <p class="text-acid-green font-mono mb-4">>> Hello_World</p>
                 <h1 class="text-6xl md:text-8xl lg:text-9xl font-display font-bold leading-[0.9] tracking-tighter mb-8 mix-blend-difference">
-                    FULL STACK<br>
-                    <span class="text-stroke hover-reveal transition-all duration-500 cursor-none">DEVELOPER</span>
+                    NEXT GEN<br>
+                    <span class="text-stroke hover-reveal transition-all duration-500 cursor-none">EXPERIENCES</span>
                 </h1>
                 <p class="text-xl md:text-2xl text-gray-400 max-w-2xl font-light mb-12 border-l-2 border-acid-green pl-6">
-                    I'm <span class="text-white font-bold">Shaikh M. Huzaifa Ali</span>. I build scalable applications, craft digital experiences, and turn caffeine into clean code using Laravel, React & PHP.
+                    I'm <span class="text-white font-bold">Shaikh M. Huzaifa Ali</span>. I build immersive applications using <span class="text-acid-green">Next.js</span>, craft 3D worlds with <span class="text-acid-green">Three.js</span>, and deploy scalable <span class="text-acid-green">MERN</span> systems.
                 </p>
                 
                 <div class="flex flex-wrap gap-4">
-                    <a href="#projects" class="group relative px-8 py-4 bg-acid-green text-black font-bold uppercase tracking-wider overflow-hidden">
+                    <a href="#projects" class="nav-link group relative px-8 py-4 bg-acid-green text-black font-bold uppercase tracking-wider overflow-hidden">
                         <span class="relative z-10 group-hover:text-white transition-colors">View Projects</span>
                         <div class="absolute inset-0 bg-black transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
                     </a>
@@ -323,7 +323,7 @@
         <div class="absolute bottom-10 left-0 w-full opacity-20 pointer-events-none rotate-[-2deg]">
             <div class="marquee-container">
                 <div class="marquee-content text-8xl font-display font-bold text-transparent" style="-webkit-text-stroke: 1px white;">
-                    PHP LARAVEL REACT MONGODB MYSQL PHP LARAVEL REACT MONGODB MYSQL PHP LARAVEL REACT MONGODB MYSQL
+                    NEXT.JS MERN STACK THREE.JS LARAVEL REACT MONGODB NEXT.JS MERN STACK THREE.JS LARAVEL REACT MONGODB
                 </div>
             </div>
         </div>
@@ -331,16 +331,16 @@
 
     <div class="w-full bg-acid-green text-black py-3 border-y border-black infinite-scroll-wrapper">
         <div class="infinite-scroll-content">
-            <span class="mx-8 font-bold font-mono text-lg">OPEN TO WORK</span> ✦ 
-            <span class="mx-8 font-bold font-mono text-lg">FULL STACK WIZARDRY</span> ✦ 
-            <span class="mx-8 font-bold font-mono text-lg">BASED IN PAKISTAN</span> ✦ 
-            <span class="mx-8 font-bold font-mono text-lg">CLEAN CODE</span> ✦
+            <span class="mx-8 font-bold font-mono text-lg">MERN STACK EXPERT</span> ✦ 
+            <span class="mx-8 font-bold font-mono text-lg">THREE.JS WIZARDRY</span> ✦ 
+            <span class="mx-8 font-bold font-mono text-lg">NEXT.JS ARCHITECT</span> ✦ 
+            <span class="mx-8 font-bold font-mono text-lg">3D WEB SPECIALIST</span> ✦
         </div>
         <div class="infinite-scroll-content">
-            <span class="mx-8 font-bold font-mono text-lg">OPEN TO WORK</span> ✦ 
-            <span class="mx-8 font-bold font-mono text-lg">FULL STACK WIZARDRY</span> ✦ 
-            <span class="mx-8 font-bold font-mono text-lg">BASED IN PAKISTAN</span> ✦ 
-            <span class="mx-8 font-bold font-mono text-lg">CLEAN CODE</span> ✦
+            <span class="mx-8 font-bold font-mono text-lg">MERN STACK EXPERT</span> ✦ 
+            <span class="mx-8 font-bold font-mono text-lg">THREE.JS WIZARDRY</span> ✦ 
+            <span class="mx-8 font-bold font-mono text-lg">NEXT.JS ARCHITECT</span> ✦ 
+            <span class="mx-8 font-bold font-mono text-lg">3D WEB SPECIALIST</span> ✦
         </div>
     </div>
 
@@ -385,7 +385,7 @@
                                 class Developer {<br>
                                 &nbsp;&nbsp;constructor() {<br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;this.passion = "Building Dreams";<br>
-                                &nbsp;&nbsp;&nbsp;&nbsp;this.coffee = true;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;this.stack = "MERN + Next.js";<br>
                                 &nbsp;&nbsp;}<br>
                                 }
                             </div>
@@ -395,12 +395,12 @@
                 
                 <div class="order-1 md:order-2">
                     <h2 class="text-acid-green font-mono mb-2">01. / ABOUT ME</h2>
-                    <h3 class="text-4xl md:text-5xl font-display font-bold mb-6">Building Digital <br>Architecture.</h3>
+                    <h3 class="text-4xl md:text-5xl font-display font-bold mb-6">Mastering the Full <br>Digital Stack.</h3>
                     <p class="text-gray-400 text-lg leading-relaxed mb-6">
-                        I am an enthusiastic Full Stack Web Developer based in Pakistan with a passion for transforming complex problems into elegant, scalable solutions. My journey began with a curiosity for how things work on the web, which quickly evolved into a career building robust applications.
+                        I am a Full Stack Developer specialized in the <span class="text-white">MERN Stack</span> and <span class="text-white">Next.js</span>. My approach combines the structural power of backend logic with the creative freedom of <span class="text-white">Three.js</span> to build 3D websites that stand out.
                     </p>
                     <p class="text-gray-400 text-lg leading-relaxed mb-8">
-                        Whether I'm architecting a database schema for a streaming platform or fine-tuning the animations on a landing page, I focus on performance, user experience, and clean, maintainable code. I don't just write code; I build digital assets that drive results.
+                        Based in Pakistan, I help businesses worldwide transition from simple websites to interactive, high-performance web applications. My code isn't just functional; it's architected for scale.
                     </p>
                     
                     <a href="https://drive.google.com/uc?export=download&id=1Xr2OBnLzhDsC87y7nkarOGoL0HVSAfH7" target="_blank" class="inline-flex items-center gap-2 text-acid-green border-b border-acid-green pb-1 font-bold hover:text-white hover:border-white transition-colors">
@@ -413,76 +413,67 @@
 
     <section id="services" class="py-32 bg-[#0a0a0a] border-y border-white/5 relative">
         <div class="container mx-auto px-6">
-            <h2 class="text-acid-green font-mono mb-16 text-center">02. / WHAT I DO</h2>
+            <h2 class="text-acid-green font-mono mb-16 text-center">02. / SERVICES</h2>
             
-            <div class="grid md:grid-cols-3 gap-8">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <div class="bg-[#121212] p-8 border border-white/5 hover:border-acid-green group transition-all duration-300 relative overflow-hidden">
                     <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                        <i data-lucide="layout" class="w-24 h-24 text-white"></i>
+                        <i data-lucide="layout" class="w-16 h-16 text-white"></i>
                     </div>
-                    <h3 class="text-2xl font-bold font-display mb-4 text-white group-hover:text-acid-green">Frontend Architecture</h3>
-                    <p class="text-gray-400 leading-relaxed mb-6">
-                        Crafting responsive, pixel-perfect user interfaces using modern libraries like React and Tailwind. I focus on smooth animations and accessibility.
+                    <h3 class="text-xl font-bold font-display mb-4 text-white group-hover:text-acid-green">Next.js & Frontend</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                        SSR, SSG, and optimized React applications using Next.js for lightning-fast SEO-friendly experiences.
                     </p>
-                    <ul class="text-sm font-mono text-gray-500 space-y-2">
-                        <li class="flex items-center gap-2"><div class="w-1 h-1 bg-acid-green"></div> SPA Development</li>
-                        <li class="flex items-center gap-2"><div class="w-1 h-1 bg-acid-green"></div> Interactive UI/UX</li>
-                        <li class="flex items-center gap-2"><div class="w-1 h-1 bg-acid-green"></div> Performance Tuning</li>
+                    <ul class="text-xs font-mono text-gray-500 space-y-2">
+                        <li>✦ App Router Mastery</li>
+                        <li>✦ Performance Optimization</li>
+                        <li>✦ Tailwind CSS Layouts</li>
                     </ul>
                 </div>
 
                 <div class="bg-[#121212] p-8 border border-white/5 hover:border-acid-green group transition-all duration-300 relative overflow-hidden">
                     <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                        <i data-lucide="server" class="w-24 h-24 text-white"></i>
+                        <i data-lucide="layers" class="w-16 h-16 text-white"></i>
                     </div>
-                    <h3 class="text-2xl font-bold font-display mb-4 text-white group-hover:text-acid-green">Backend Development</h3>
-                    <p class="text-gray-400 leading-relaxed mb-6">
-                        Building robust server-side logic and scalable APIs using Laravel, Node.js, and PHP. Security and data integrity are my top priorities.
+                    <h3 class="text-xl font-bold font-display mb-4 text-white group-hover:text-acid-green">MERN Stack Apps</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                        Full-stack web applications built on MongoDB, Express, React, and Node.js for modern scalability.
                     </p>
-                    <ul class="text-sm font-mono text-gray-500 space-y-2">
-                        <li class="flex items-center gap-2"><div class="w-1 h-1 bg-acid-green"></div> RESTful API Design</li>
-                        <li class="flex items-center gap-2"><div class="w-1 h-1 bg-acid-green"></div> Database Management</li>
-                        <li class="flex items-center gap-2"><div class="w-1 h-1 bg-acid-green"></div> Server Logic</li>
+                    <ul class="text-xs font-mono text-gray-500 space-y-2">
+                        <li>✦ REST & GraphQL APIs</li>
+                        <li>✦ Authentication Systems</li>
+                        <li>✦ State Management</li>
                     </ul>
                 </div>
 
                 <div class="bg-[#121212] p-8 border border-white/5 hover:border-acid-green group transition-all duration-300 relative overflow-hidden">
                     <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                        <i data-lucide="database" class="w-24 h-24 text-white"></i>
+                        <i data-lucide="box" class="w-16 h-16 text-white"></i>
                     </div>
-                    <h3 class="text-2xl font-bold font-display mb-4 text-white group-hover:text-acid-green">Full Stack Solutions</h3>
-                    <p class="text-gray-400 leading-relaxed mb-6">
-                        Handling the entire development lifecycle, from database design (MySQL/MongoDB) to deployment. Seamless integration between front and back ends.
+                    <h3 class="text-xl font-bold font-display mb-4 text-white group-hover:text-acid-green">3D Web / Three.js</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                        Immersive 3D environments and interactive models integrated directly into your web browser.
                     </p>
-                    <ul class="text-sm font-mono text-gray-500 space-y-2">
-                        <li class="flex items-center gap-2"><div class="w-1 h-1 bg-acid-green"></div> System Architecture</li>
-                        <li class="flex items-center gap-2"><div class="w-1 h-1 bg-acid-green"></div> Third-party Integrations</li>
-                        <li class="flex items-center gap-2"><div class="w-1 h-1 bg-acid-green"></div> E-commerce Solutions</li>
+                    <ul class="text-xs font-mono text-gray-500 space-y-2">
+                        <li>✦ WebGL Experiences</li>
+                        <li>✦ Interactive 3D Scenes</li>
+                        <li>✦ Custom Shaders</li>
                     </ul>
                 </div>
-            </div>
-        </div>
-    </section>
 
-    <section class="py-24 bg-[#050505]">
-        <div class="container mx-auto px-6">
-            <div class="max-w-4xl mx-auto text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-display font-bold mb-4">Why Work With Me?</h2>
-                <p class="text-gray-400">Beyond the code, here is the value I bring to every project.</p>
-            </div>
-
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="p-6 border-l-2 border-acid-green bg-white/5 backdrop-blur-sm">
-                    <h4 class="text-xl font-bold text-white mb-2">Lightning Fast</h4>
-                    <p class="text-sm text-gray-400">I prioritize performance optimization, ensuring your applications load instantly and run smoothly on all devices.</p>
-                </div>
-                <div class="p-6 border-l-2 border-acid-green bg-white/5 backdrop-blur-sm">
-                    <h4 class="text-xl font-bold text-white mb-2">Clean Code</h4>
-                    <p class="text-sm text-gray-400">Maintainable, scalable, and well-documented code is my standard. Future-proof development that is easy to upgrade.</p>
-                </div>
-                <div class="p-6 border-l-2 border-acid-green bg-white/5 backdrop-blur-sm">
-                    <h4 class="text-xl font-bold text-white mb-2">Clear Communication</h4>
-                    <p class="text-sm text-gray-400">No tech jargon. I keep you updated at every stage of the development process with clear, transparent communication.</p>
+                <div class="bg-[#121212] p-8 border border-white/5 hover:border-acid-green group transition-all duration-300 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                        <i data-lucide="server" class="w-16 h-16 text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold font-display mb-4 text-white group-hover:text-acid-green">Laravel Backend</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                        Building complex server-side architectures and secure enterprise-level applications with Laravel & PHP.
+                    </p>
+                    <ul class="text-xs font-mono text-gray-500 space-y-2">
+                        <li>✦ Enterprise Architecture</li>
+                        <li>✦ Payment Integrations</li>
+                        <li>✦ Security Audits</li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -496,25 +487,25 @@
                 <div class="group p-6 border border-white/10 hover:border-acid-green hover:bg-white/5 transition-all duration-300">
                     <i data-lucide="code-2" class="w-8 h-8 text-white mb-4 group-hover:text-acid-green"></i>
                     <h4 class="font-bold text-xl mb-2">Frontend</h4>
-                    <p class="text-sm text-gray-400">React, HTML5, CSS3, Tailwind, Bootstrap, JavaScript</p>
+                    <p class="text-sm text-gray-400">Next.js, React, Tailwind, Three.js, GSAP, JavaScript (ES6+)</p>
                 </div>
 
                 <div class="group p-6 border border-white/10 hover:border-acid-green hover:bg-white/5 transition-all duration-300">
                     <i data-lucide="database" class="w-8 h-8 text-white mb-4 group-hover:text-acid-green"></i>
                     <h4 class="font-bold text-xl mb-2">Backend</h4>
-                    <p class="text-sm text-gray-400">PHP, Laravel, Nodejs, Expressjs, REST APIs</p>
+                    <p class="text-sm text-gray-400">Node.js, Express, Laravel (PHP), REST APIs, JWT</p>
                 </div>
 
                 <div class="group p-6 border border-white/10 hover:border-acid-green hover:bg-white/5 transition-all duration-300">
                     <i data-lucide="server" class="w-8 h-8 text-white mb-4 group-hover:text-acid-green"></i>
                     <h4 class="font-bold text-xl mb-2">Database</h4>
-                    <p class="text-sm text-gray-400">MySQL, MongoDB, phpMyAdmin</p>
+                    <p class="text-sm text-gray-400">MongoDB, MySQL, PostgreSQL, Prisma ORM</p>
                 </div>
 
                 <div class="group p-6 border border-white/10 hover:border-acid-green hover:bg-white/5 transition-all duration-300">
                     <i data-lucide="wrench" class="w-8 h-8 text-white mb-4 group-hover:text-acid-green"></i>
                     <h4 class="font-bold text-xl mb-2">Tools</h4>
-                    <p class="text-sm text-gray-400">Git, VS Code, Postman</p>
+                    <p class="text-sm text-gray-400">Git, Docker, VS Code, Postman, Vercel, AWS</p>
                 </div>
             </div>
         </div>
@@ -559,36 +550,6 @@
                     <div class="absolute left-0 md:left-1/2 top-0 w-8 h-8 bg-black border-2 border-acid-green rounded-full transform md:-translate-x-1/2 timeline-dot z-10 ml-0 md:ml-0"></div>
                     <div class="md:w-1/2 md:pl-12 hidden md:block"></div>
                 </div>
-
-            </div>
-        </div>
-    </section>
-
-    <section class="py-32">
-        <div class="container mx-auto px-6">
-            <h2 class="text-acid-green font-mono mb-16 text-center">05. / MY WORKFLOW</h2>
-            
-            <div class="grid md:grid-cols-4 gap-8 relative">
-                <div class="workflow-step relative z-10 text-center">
-                    <div class="w-16 h-16 rounded-full border-2 border-acid-green bg-black flex items-center justify-center mx-auto mb-6 text-xl font-bold text-white group hover:bg-acid-green hover:text-black transition-all">01</div>
-                    <h4 class="text-xl font-bold mb-2 text-white">Discover</h4>
-                    <p class="text-sm text-gray-400">Analyze requirements, understand the problem, and plan the architecture.</p>
-                </div>
-                <div class="workflow-step relative z-10 text-center">
-                    <div class="w-16 h-16 rounded-full border-2 border-white/20 bg-black flex items-center justify-center mx-auto mb-6 text-xl font-bold text-white group hover:border-acid-green transition-all">02</div>
-                    <h4 class="text-xl font-bold mb-2 text-white">Design</h4>
-                    <p class="text-sm text-gray-400">Create wireframes, database schemas, and system logic for scalability.</p>
-                </div>
-                <div class="workflow-step relative z-10 text-center">
-                    <div class="w-16 h-16 rounded-full border-2 border-white/20 bg-black flex items-center justify-center mx-auto mb-6 text-xl font-bold text-white group hover:border-acid-green transition-all">03</div>
-                    <h4 class="text-xl font-bold mb-2 text-white">Develop</h4>
-                    <p class="text-sm text-gray-400">Write clean, efficient code using the best tools for the job (React/Laravel).</p>
-                </div>
-                <div class="workflow-step relative z-10 text-center">
-                    <div class="w-16 h-16 rounded-full border-2 border-white/20 bg-black flex items-center justify-center mx-auto mb-6 text-xl font-bold text-white group hover:border-acid-green transition-all">04</div>
-                    <h4 class="text-xl font-bold mb-2 text-white">Deploy</h4>
-                    <p class="text-sm text-gray-400">Test rigorously, optimize performance, and launch the final product.</p>
-                </div>
             </div>
         </div>
     </section>
@@ -605,8 +566,8 @@
                     <button class="filter-btn active px-4 py-2 border border-white/20 text-sm font-bold uppercase transition-all hover:border-acid-green hover:text-acid-green" data-filter="all">All</button>
                     <button class="filter-btn px-4 py-2 border border-white/20 text-white text-sm font-bold uppercase transition-all hover:border-acid-green hover:text-acid-green" data-filter="website">Websites</button>
                     <button class="filter-btn px-4 py-2 border border-white/20 text-white text-sm font-bold uppercase transition-all hover:border-acid-green hover:text-acid-green" data-filter="application">Apps</button>
-                    <button class="filter-btn px-4 py-2 border border-white/20 text-white text-sm font-bold uppercase transition-all hover:border-acid-green hover:text-acid-green" data-filter="graphics">Graphic Design</button>
-                    <button class="filter-btn px-4 py-2 border border-white/20 text-white text-sm font-bold uppercase transition-all hover:border-acid-green hover:text-acid-green" data-filter="video">Video Editing</button>
+                    <button class="filter-btn px-4 py-2 border border-white/20 text-white text-sm font-bold uppercase transition-all hover:border-acid-green hover:text-acid-green" data-filter="graphics">Graphics</button>
+                    <button class="filter-btn px-4 py-2 border border-white/20 text-white text-sm font-bold uppercase transition-all hover:border-acid-green hover:text-acid-green" data-filter="video">Video</button>
                     <button class="filter-btn px-4 py-2 border border-white/20 text-white text-sm font-bold uppercase transition-all hover:border-acid-green hover:text-acid-green" data-filter="logo">Logo</button>
                 </div>
             </div>
@@ -615,42 +576,41 @@
 
             <div class="flex flex-col gap-24" id="projects-grid">
                 
-                 <div class="group relative grid md:grid-cols-12 gap-8 items-center project-card" data-category="website application">
-    <div class="md:col-span-7 z-10 order-2 md:order-1">
-        <h4 class="text-3xl font-display font-bold mb-4 group-hover:text-acid-green transition-colors">Ather Mother Care</h4>
-        <div class="bg-[#1a1a1a] p-6 rounded-sm border border-white/5 shadow-xl mb-6 backdrop-blur-sm bg-opacity-80">
-            <p class="text-gray-300">
-                A comprehensive e-commerce and healthcare platform dedicated to mother and baby care products. Features a streamlined shopping experience, secure checkout, and a user-friendly interface tailored for parents.
-            </p>
-        </div>
-        <ul class="flex flex-wrap gap-4 font-mono text-sm text-acid-green mb-8">
-            <li>E-commerce</li>
-            <li>React / Next.js</li>
-            <li>Tailwind CSS</li>
-            <li>Responsive Design</li>
-        </ul>
-        <div class="flex flex-wrap gap-4">
-            <a href="https://athermothercare.pk" target="_blank" class="px-6 py-2 border border-white/20 text-white font-bold text-sm uppercase hover:border-acid-green hover:text-acid-green transition-all flex items-center gap-2">
-                <i data-lucide="external-link" class="w-4 h-4"></i> Visit Site
-            </a>
-            <a href="https://athermothercare.pk" target="_blank" class="px-6 py-2 bg-white/5 border border-white/20 text-white font-bold text-sm uppercase hover:bg-acid-green hover:text-black hover:border-acid-green transition-all flex items-center gap-2">
-                <i data-lucide="eye" class="w-4 h-4"></i> Live Demo
-            </a>
-        </div>
-    </div>
-    <div class="md:col-span-5 relative h-[300px] border border-white/10 bg-gradient-to-br from-gray-900 to-black overflow-hidden group-hover:border-acid-green/50 transition-all duration-500 order-1 md:order-2">
-        <div class="absolute inset-0 flex items-center justify-center">
-            <i data-lucide="shopping-cart" class="w-24 h-24 text-gray-800 group-hover:text-acid-green group-hover:scale-110 transition-all duration-500"></i>
-        </div>
-        <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:20px_20px]"></div>
-    </div>
-</div>
+                <!-- Project 1 -->
+                <div class="group relative grid md:grid-cols-12 gap-8 items-center project-card" data-category="website application">
+                    <div class="md:col-span-7 z-10 order-2 md:order-1">
+                        <h4 class="text-3xl font-display font-bold mb-4 group-hover:text-acid-green transition-colors">Ather Mother Care</h4>
+                        <div class="bg-[#1a1a1a] p-6 rounded-sm border border-white/5 shadow-xl mb-6 backdrop-blur-sm bg-opacity-80">
+                            <p class="text-gray-300">
+                                A comprehensive e-commerce and healthcare platform. Built with <span class="text-white">Next.js</span> for speed and <span class="text-white">Laravel</span> for a robust backend.
+                            </p>
+                        </div>
+                        <ul class="flex flex-wrap gap-4 font-mono text-sm text-acid-green mb-8">
+                            <li>Next.js</li>
+                            <li>Laravel</li>
+                            <li>Tailwind CSS</li>
+                            <li>MySQL</li>
+                        </ul>
+                        <div class="flex flex-wrap gap-4">
+                            <a href="https://athermothercare.pk" target="_blank" class="px-6 py-2 border border-white/20 text-white font-bold text-sm uppercase hover:border-acid-green hover:text-acid-green transition-all flex items-center gap-2">
+                                <i data-lucide="external-link" class="w-4 h-4"></i> Visit Site
+                            </a>
+                        </div>
+                    </div>
+                    <div class="md:col-span-5 relative h-[300px] border border-white/10 bg-gradient-to-br from-gray-900 to-black overflow-hidden group-hover:border-acid-green/50 transition-all duration-500 order-1 md:order-2">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <i data-lucide="shopping-cart" class="w-24 h-24 text-gray-800 group-hover:text-acid-green group-hover:scale-110 transition-all duration-500"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
                 <div class="group relative grid md:grid-cols-12 gap-8 items-center project-card" data-category="website application">
                     <div class="md:col-span-7 z-10 order-2 md:order-1">
                         <h4 class="text-3xl font-display font-bold mb-4 group-hover:text-acid-green transition-colors">Build Your Dream</h4>
                         <div class="bg-[#1a1a1a] p-6 rounded-sm border border-white/5 shadow-xl mb-6 backdrop-blur-sm bg-opacity-80">
                             <p class="text-gray-300">
-                                A Virtual PC Builder website enabling users to assemble custom PCs by selecting compatible components. Features a complex logic system for compatibility and an integrated AI performance check.
+                                A Virtual PC Builder website with complex logic systems for component compatibility and AI-driven performance checks.
                             </p>
                         </div>
                         <ul class="flex flex-wrap gap-4 font-mono text-sm text-acid-green mb-8">
@@ -663,72 +623,60 @@
                             <a href="https://github.com/Huzaifa-ali-dev/Build-Your-Dream.git" class="px-6 py-2 border border-white/20 text-white font-bold text-sm uppercase hover:border-acid-green hover:text-acid-green transition-all flex items-center gap-2">
                                 <i data-lucide="github" class="w-4 h-4"></i> Code
                             </a>
-                            <a href="https://www.youtube.com/watch?v=HaXNurafznY" target="_blank" class="px-6 py-2 bg-white/5 border border-white/20 text-white font-bold text-sm uppercase hover:bg-acid-green hover:text-black hover:border-acid-green transition-all flex items-center gap-2">
-                                <i data-lucide="youtube" class="w-4 h-4"></i> Watch Demo
-                            </a>
                         </div>
                     </div>
                     <div class="md:col-span-5 relative h-[300px] border border-white/10 bg-gradient-to-br from-gray-900 to-black overflow-hidden group-hover:border-acid-green/50 transition-all duration-500 order-1 md:order-2">
                         <div class="absolute inset-0 flex items-center justify-center">
                             <i data-lucide="monitor" class="w-24 h-24 text-gray-800 group-hover:text-acid-green group-hover:scale-110 transition-all duration-500"></i>
                         </div>
-                        <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:20px_20px]"></div>
                     </div>
                 </div>
 
+                <!-- Project 3 -->
                 <div class="group relative grid md:grid-cols-12 gap-8 items-center project-card" data-category="website">
                     <div class="md:col-span-5 relative h-[300px] border border-white/10 bg-gradient-to-br from-gray-900 to-black overflow-hidden group-hover:border-acid-green/50 transition-all duration-500">
                         <div class="absolute inset-0 flex items-center justify-center">
                             <i data-lucide="play-circle" class="w-24 h-24 text-gray-800 group-hover:text-acid-green group-hover:scale-110 transition-all duration-500"></i>
                         </div>
-                        <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:20px_20px]"></div>
                     </div>
                     <div class="md:col-span-7 z-10 text-right md:text-left">
                         <h4 class="text-3xl font-display font-bold mb-4 group-hover:text-acid-green transition-colors">TrueKinspection.com</h4>
                         <div class="bg-[#1a1a1a] p-6 rounded-sm border border-white/5 shadow-xl mb-6 backdrop-blur-sm bg-opacity-80 md:-ml-12 z-20 relative">
                             <p class="text-gray-300">
-                                Instant Vehicle Insights: A streamlined platform delivering detailed inspection reports via a single VIN lookup
+                                Instant Vehicle Insights platform delivering detailed inspection reports via automated VIN lookups.
                             </p>
                         </div>
                         <ul class="flex flex-wrap gap-4 font-mono text-sm text-acid-green mb-8 justify-end md:justify-start">
                              <li>Next.js</li>
                             <li>MongoDB</li>
                             <li>Bootstrap</li>
-                            <li>AI Integration</li>
                         </ul>
                         <div class="flex flex-wrap gap-4 justify-end md:justify-start">
-                             <a href="https://github.com/Huzii-ali-123/truek-inspection.git" class="px-6 py-2 border border-white/20 text-white font-bold text-sm uppercase hover:border-acid-green hover:text-acid-green transition-all flex items-center gap-2">
-                                <i data-lucide="github" class="w-4 h-4"></i> Code
-                            </a>
-                             <a href="https://www.truekinspection.com" target="_blank" class="px-6 py-2 bg-acid-green text-black font-bold text-sm uppercase hover:bg-white hover:text-black transition-all flex items-center gap-2">
+                             <a href="https://www.truekinspection.com" target="_blank" class="px-6 py-2 bg-acid-green text-black font-bold text-sm uppercase hover:bg-white transition-all flex items-center gap-2">
                                 <i data-lucide="external-link" class="w-4 h-4"></i> Live Site
                             </a>
                         </div>
                     </div>
                 </div>
 
-                 <div class="group relative grid md:grid-cols-12 gap-8 items-center project-card" data-category="website application">
+                <!-- Project 4 -->
+                <div class="group relative grid md:grid-cols-12 gap-8 items-center project-card" data-category="website application">
                     <div class="md:col-span-7 z-10 order-2 md:order-1">
                         <h4 class="text-3xl font-display font-bold mb-4 group-hover:text-acid-green transition-colors">StreamTrace</h4>
                         <div class="bg-[#1a1a1a] p-6 rounded-sm border border-white/5 shadow-xl mb-6 backdrop-blur-sm bg-opacity-80">
                             <p class="text-gray-300">
-                                A comprehensive dashboard for managing streaming services and subscriptions. Includes a secure login system, cost tracking, and subscription renewal alerts.
+                                A full <span class="text-white">MERN Stack</span> subscription manager. Features secure authentication and real-time cost tracking.
                             </p>
                         </div>
                         <ul class="flex flex-wrap gap-4 font-mono text-sm text-acid-green mb-8">
-                            <li>React.js</li>
                             <li>MongoDB</li>
-                            <li>Express.js</li>
-                            <li>Nodejs</li>
-                            <li>Dashboard</li>
-                            <li>Auth</li>
+                            <li>Express</li>
+                            <li>React</li>
+                            <li>Node.js</li>
                         </ul>
                         <div class="flex flex-wrap gap-4">
                            <a href="https://github.com/Huzaifa-ali-dev/vite-react.git" class="px-6 py-2 border border-white/20 text-white font-bold text-sm uppercase hover:border-acid-green hover:text-acid-green transition-all flex items-center gap-2">
                                 <i data-lucide="github" class="w-4 h-4"></i> Code
-                            </a>
-                            <a href="https://www.youtube.com/watch?v=Tj6tMyf3QCk" target="_blank" class="px-6 py-2 bg-white/5 border border-white/20 text-white font-bold text-sm uppercase hover:bg-acid-green hover:text-black hover:border-acid-green transition-all flex items-center gap-2">
-                                <i data-lucide="youtube" class="w-4 h-4"></i> Watch Demo
                             </a>
                         </div>
                     </div>
@@ -736,62 +684,49 @@
                         <div class="absolute inset-0 flex items-center justify-center">
                             <i data-lucide="monitor" class="w-24 h-24 text-gray-800 group-hover:text-acid-green group-hover:scale-110 transition-all duration-500"></i>
                         </div>
-                        <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:20px_20px]"></div>
                     </div>
                 </div>
 
+                <!-- Project 5 -->
                 <div class="group relative grid md:grid-cols-12 gap-8 items-center project-card" data-category="graphics logo">
                     <div class="md:col-span-5 relative h-[300px] border border-white/10 bg-gradient-to-br from-gray-900 to-black overflow-hidden group-hover:border-acid-green/50 transition-all duration-500">
                         <div class="absolute inset-0 flex items-center justify-center">
                             <i data-lucide="palette" class="w-24 h-24 text-gray-800 group-hover:text-acid-green group-hover:scale-110 transition-all duration-500"></i>
                         </div>
-                         <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:20px_20px]"></div>
                     </div>
                     <div class="md:col-span-7 z-10 text-right md:text-left">
                         <h4 class="text-3xl font-display font-bold mb-4 group-hover:text-acid-green transition-colors">Brand Identity Pack</h4>
                         <div class="bg-[#1a1a1a] p-6 rounded-sm border border-white/5 shadow-xl mb-6 backdrop-blur-sm bg-opacity-80 md:-ml-12 z-20 relative">
                             <p class="text-gray-300">
-                                Complete visual identity redesign for a fintech startup. Includes logo, typography guidelines, and social media assets.
+                                Complete visual redesign for a fintech startup. Includes logo, guidelines, and social media assets.
                             </p>
                         </div>
                         <ul class="flex flex-wrap gap-4 font-mono text-sm text-acid-green mb-8 justify-end md:justify-start">
                              <li>Illustrator</li>
                              <li>Photoshop</li>
                              <li>Branding</li>
-                             <li>Vector Art</li>
                         </ul>
-                         <div class="flex flex-wrap gap-4 justify-end md:justify-start">
-                            <span class="px-6 py-2 border border-white/20 text-gray-400 font-bold text-sm uppercase flex items-center gap-2 cursor-not-allowed">
-                                <i data-lucide="lock" class="w-4 h-4"></i> Private
-                            </span>
-                        </div>
                     </div>
                 </div>
 
+                <!-- Project 6 -->
                 <div class="group relative grid md:grid-cols-12 gap-8 items-center project-card" data-category="video">
                     <div class="md:col-span-7 z-10 order-2 md:order-1">
                         <h4 class="text-3xl font-display font-bold mb-4 group-hover:text-acid-green transition-colors">Tech Promo Reel</h4>
                         <div class="bg-[#1a1a1a] p-6 rounded-sm border border-white/5 shadow-xl mb-6 backdrop-blur-sm bg-opacity-80">
                             <p class="text-gray-300">
-                                A high-energy promotional video for a software launch. Features motion graphics, kinetic typography, and sound design.
+                                High-energy promotional video featuring motion graphics and kinetic typography for software launches.
                             </p>
                         </div>
                         <ul class="flex flex-wrap gap-4 font-mono text-sm text-acid-green mb-8">
                             <li>Premiere Pro</li>
                             <li>After Effects</li>
-                            <li>Sound Design</li>
                         </ul>
-                         <div class="flex flex-wrap gap-4">
-                            <span class="px-6 py-2 border border-white/20 text-gray-400 font-bold text-sm uppercase flex items-center gap-2 cursor-not-allowed">
-                                <i data-lucide="lock" class="w-4 h-4"></i> Private
-                            </span>
-                        </div>
                     </div>
                     <div class="md:col-span-5 relative h-[300px] border border-white/10 bg-gradient-to-br from-gray-900 to-black overflow-hidden group-hover:border-acid-green/50 transition-all duration-500 order-1 md:order-2">
                         <div class="absolute inset-0 flex items-center justify-center">
                             <i data-lucide="film" class="w-24 h-24 text-gray-800 group-hover:text-acid-green group-hover:scale-110 transition-all duration-500"></i>
                         </div>
-                        <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:20px_20px]"></div>
                     </div>
                 </div>
 
@@ -805,9 +740,9 @@
                 
                 <div>
                     <h2 class="text-acid-green font-mono mb-4">07. / WHAT'S NEXT?</h2>
-                    <h3 class="text-5xl md:text-6xl font-display font-bold mb-8">Let's Work Together</h3>
+                    <h3 class="text-5xl md:text-6xl font-display font-bold mb-8">Let's Build Something Immersive</h3>
                     <p class="text-gray-400 text-lg mb-12 leading-relaxed">
-                        I'm currently looking for new opportunities to build scalable web applications. Have a project in mind or just want to discuss the latest tech trends? Drop me a message!
+                        I'm currently accepting new projects involving <span class="text-white">Next.js architecture</span>, <span class="text-white">MERN stack solutions</span>, or custom <span class="text-white">Three.js integrations</span>. Let's make your digital presence unforgettable.
                     </p>
                     
                     <div class="flex flex-col gap-6">
@@ -821,17 +756,6 @@
                             </div>
                         </div>
 
-                        <div class="flex items-center gap-4 group">
-                            <div class="w-12 h-12 border border-white/20 flex items-center justify-center group-hover:border-acid-green group-hover:bg-acid-green/10 transition-all">
-                                <i data-lucide="phone" class="text-acid-green"></i>
-                            </div>
-                            <div>
-                                <span class="block text-sm text-gray-500 font-mono">Call Me</span>
-                                <a href="tel:+923321335442" class="text-xl font-bold hover:text-acid-green transition-colors">+92 332 1335442</a>
-                            </div>
-                        </div>
-
-                        <!-- Added WhatsApp Direct Link -->
                         <div class="flex items-center gap-4 group">
                             <div class="w-12 h-12 border border-white/20 flex items-center justify-center group-hover:border-acid-green group-hover:bg-acid-green/10 transition-all">
                                 <i data-lucide="message-circle" class="text-acid-green"></i>
@@ -849,23 +773,17 @@
                     </div>
                 </div>
 
-                <!-- Replaced Form with Calendly Link Card -->
                 <div class="bg-[#121212] p-10 border border-white/10 relative group">
                     <div class="absolute -inset-1 bg-gradient-to-r from-acid-green to-neon-purple opacity-20 group-hover:opacity-40 blur transition duration-500"></div>
-                    
                     <div class="relative z-10 text-center">
                         <div class="w-20 h-20 bg-white/5 border border-acid-green/30 rounded-full flex items-center justify-center mx-auto mb-6">
                             <i data-lucide="calendar" class="w-10 h-10 text-acid-green"></i>
                         </div>
-                        <h4 class="text-3xl font-display font-bold mb-4">Book a Strategy Session</h4>
-                        <p class="text-gray-400 mb-8">Skip the back-and-forth emails. Pick a time that works for you, and let's discuss your project goals directly on a call.</p>
-                        
-                        <!-- Replace the # with your copied Calendly link -->
+                        <h4 class="text-3xl font-display font-bold mb-4">Strategy Session</h4>
+                        <p class="text-gray-400 mb-8">Discussing project goals, stack selection (MERN vs Next.js), and interactive 3D features.</p>
                         <a href="https://calendly.com/huzaifadx780/starter-meeting" target="_blank" class="block w-full bg-acid-green text-black font-bold uppercase tracking-widest py-5 hover:bg-white transition-all border border-transparent">
                             Schedule a Call
                         </a>
-                        
-                        <p class="mt-6 text-xs font-mono text-gray-500 uppercase tracking-widest">Powered by Calendly</p>
                     </div>
                 </div>
 
@@ -882,7 +800,7 @@
 
     <div class="progress-wrap" id="progress-wrap">
         <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
-            <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" style="transition: stroke-dashoffset 10ms linear; stroke-dasharray: 307.919, 307.919; stroke-dashoffset: 307.919;"></path>
+            <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"></path>
         </svg>
         <i data-lucide="arrow-up" class="absolute text-acid-green w-6 h-6 arrow-icon"></i>
     </div>
@@ -907,13 +825,26 @@
         }
         requestAnimationFrame(raf);
 
-        // Bind Lenis to ScrollTrigger
         lenis.on('scroll', ScrollTrigger.update);
         gsap.ticker.add((time) => {
             lenis.raf(time * 1000);
         });
 
         lucide.createIcons();
+
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                const targetId = link.getAttribute('href');
+                if (targetId.startsWith('#')) {
+                    e.preventDefault();
+                    lenis.scrollTo(targetId);
+                }
+            });
+        });
+
+        document.getElementById('cta-talk').addEventListener('click', () => {
+            lenis.scrollTo('#contact');
+        });
 
         const btn = document.getElementById('mobile-menu-btn');
         const menu = document.getElementById('mobile-menu');
@@ -963,7 +894,7 @@
                         project.style.display = 'none';
                     }
                 });
-                ScrollTrigger.refresh();
+                setTimeout(() => ScrollTrigger.refresh(), 100);
             });
         });
 
@@ -1028,13 +959,6 @@
 
         camera.position.z = 5;
 
-        let mouseX = 0;
-        let mouseY = 0;
-        document.addEventListener('mousemove', (event) => {
-            mouseX = (event.clientX - window.innerWidth / 2);
-            mouseY = (event.clientY - window.innerHeight / 2);
-        });
-
         const clock = new THREE.Clock();
         function animate() {
             const elapsedTime = clock.getElapsedTime();
@@ -1051,6 +975,7 @@
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
             renderer.setSize(window.innerWidth, window.innerHeight);
+            ScrollTrigger.refresh();
         });
 
         gsap.registerPlugin(ScrollTrigger);
@@ -1062,8 +987,8 @@
                 stagger: 0.2,
                 scrollTrigger: {
                     trigger: section,
-                    start: "top 80%",
-                    toggleActions: "play none none reverse"
+                    start: "top 85%",
+                    toggleActions: "play none none none"
                 }
             });
         });
@@ -1084,7 +1009,8 @@
             ScrollTrigger.create({
                 trigger: counter,
                 start: "top 90%",
-                onEnter: updateCount
+                onEnter: updateCount,
+                once: true
             });
         });
 
@@ -1115,6 +1041,10 @@
             event.preventDefault();
             lenis.scrollTo(0);
         });
+
+        window.onload = () => {
+            ScrollTrigger.refresh();
+        };
 
     </script>
 </body>
